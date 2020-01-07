@@ -1,0 +1,23 @@
+{
+  "name": "telegram_bot_real-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romasheva/telegram_bot_real-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/romasheva/telegram_bot_real-project/issues"
+  },
+  "homepage": "https://github.com/romasheva/telegram_bot_real-project#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
