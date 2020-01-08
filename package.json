@@ -19,5 +19,8 @@
   "homepage": "https://github.com/romasheva/telegram_bot_real-project#readme",
   "devDependencies": {
     "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.40.0"
   }
 }

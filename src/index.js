@@ -7,5 +7,5 @@ const bot = new TelegramBot(config.TOKEN, {
     polling: true
 })
 bot.on('message', msg => {
-    console.log('Working')
+    console.log('Working', msg.from.first_name)
 })
