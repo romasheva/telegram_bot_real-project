@@ -14,7 +14,7 @@ mongoose.connect(config.DB_URL, {
     .catch((err) => console.log(err))
 require('./models/film.model')
 const Film = mongoose.model('films')
-// database.films.forEach(f => new Film(f).save().catch(e => console.log(e)))
+database.films.forEach(f => new Film(f).save().catch(e => console.log(e)))
 
 const bot = new TelegramBot(config.TOKEN, {
     polling: true
