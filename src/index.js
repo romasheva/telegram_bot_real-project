@@ -60,6 +60,18 @@ bot.onText(/\/start/, msg => {
     })
 })
 
+bot.onText(/\/f(.+)/, (msg, [source, match]) => {
+    const filmUuid = helper.getItemUuid(source)
+    const chatId = helper.getChatId(msg)
+    console.log(filmUuid)
+    Film.findOne({uuid: filmUuid}).then(film => {
+        const caption = `Название: ${film.name}\nГод: ${film.year}\nРейтинг: ${film.rate}\nДлительность: ${film.length}\nСтрана: ${film.country}`
+        bot.sendPhoto(chatId, film.picture, {
+            caption: caption
+        })
+    })
+})
+
 function sendFilmsByQuery(chatId, query) {
     Film.find(query).then(films => {
         const html = films.map((f, i) => {
