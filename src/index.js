@@ -67,7 +67,27 @@ bot.onText(/\/f(.+)/, (msg, [source, match]) => {
     Film.findOne({uuid: filmUuid}).then(film => {
         const caption = `Название: ${film.name}\nГод: ${film.year}\nРейтинг: ${film.rate}\nДлительность: ${film.length}\nСтрана: ${film.country}`
         bot.sendPhoto(chatId, film.picture, {
-            caption: caption
+            caption: caption,
+            reply_markup: {
+                inline_keyboard: [
+                   [
+                       {
+                           text: 'Добавить в избранное',
+                           callback_data: film.uuid
+                       },
+                       {
+                           text: 'Показать кинотеатры',
+                           callback_data: film.uuid
+                       }
+                    ],
+                    [
+                        {
+                            text: `Кинопоиск ${film.name}`,
+                            url: film.link
+                        }
+                    ] 
+                ]
+            }
         })
     })
 })
