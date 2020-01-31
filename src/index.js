@@ -56,6 +56,7 @@ bot.on('message', msg => {
     }
     if (msg.location) {
         console.log(msg.location)
+        getCinemasInCoord(chatId, msg.location)
     }
 })
 
@@ -121,4 +122,12 @@ function sendHTML(chatId, html, kbName = null) {
         }
     }
     bot.sendMessage(chatId, html, options)
+}
+function getCinemasInCoord(chatId, location) {
+    Cinema.find({}).then(cinemas => {
+        const html = cinemas.map((c, i) => {
+            return `<b>${i + 1}</b> ${c.name}. <em>Расстояние</em> - <strong>${1000}</strong> км. /c${c.uuid}`
+        }).join('\n')
+        sendHTML(chatId, html, 'home')
+    })
 }
