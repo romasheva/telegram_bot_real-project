@@ -124,11 +124,12 @@ bot.onText(/\/c(.+)/, (msg, [source, match]) => {
                     [
                         {
                             text: 'Показать фильмы',
-                            callback_data: cinema.films
+                            callback_data: JSON.stringify(cinema.films)
                         }
                     ]
                 ]
-        }
+            }
+        })
     })
 })
 
