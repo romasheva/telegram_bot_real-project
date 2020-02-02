@@ -22,6 +22,12 @@ const Cinema = mongoose.model('cinemas')
 const User = mongoose.model('users')
 // database.films.forEach(f => new Film(f).save().catch(e => console.log(e)))
 // database.cinemas.forEach(c => new Cinema(c).save().catch(e => console.log(e)))
+const ACTION_TYPE = {
+    TOOGLE_FAV_FILM: 'tff',
+    SGOW_CINEMAS: 'sc',
+    SHOW_CINEMAS_MAP: 'scm',
+    SHOW_FILMS: 'sf'
+}
 const bot = new TelegramBot(config.TOKEN, {
     polling: true
 })
@@ -88,11 +94,17 @@ bot.onText(/\/f(.+)/, (msg, [source, match]) => {
                    [
                        {
                            text: 'Добавить в избранное',
-                           callback_data: film.uuid
+                           callback_data: JSON.stringify({
+                               type: ACTION_TYPE.TOOGLE_FAV_FILM,
+                               filmUuid: film.uuid
+                           })
                        },
                        {
                            text: 'Показать кинотеатры',
-                           callback_data: film.uuid
+                           callback_data: JSON.stringify({
+                               type: ACTION_TYPE.SGOW_CINEMAS,
+                               cinemaUuids: film.cinemas
+                           })
                        }
                     ],
                     [
@@ -120,13 +132,20 @@ bot.onText(/\/c(.+)/, (msg, [source, match]) => {
                         },
                         {
                             text: 'Показать на карте',
-                            callback_data: JSON.stringify(cinema.uuid)
+                            callback_data: JSON.stringify({
+                                type: ACTION_TYPE.SHOW_CINEMAS_MAP,
+                                lat: cinema.location.latitude,
+                                lon: cinema.location.latitude
+                            })
                         }
                     ],
                     [
                         {
                             text: 'Показать фильмы',
-                            callback_data: JSON.stringify(cinema.films)
+                            callback_data: JSON.stringify({
+                                type: ACTION_TYPE.SHOW_FILMS,
+                                filmUuids: cinema.films
+                            })
                         }
                     ]
                 ]
