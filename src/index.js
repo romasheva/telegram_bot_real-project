@@ -24,7 +24,7 @@ const User = mongoose.model('users')
 // database.cinemas.forEach(c => new Cinema(c).save().catch(e => console.log(e)))
 const ACTION_TYPE = {
     TOOGLE_FAV_FILM: 'tff',
-    SGOW_CINEMAS: 'sc',
+    SHOW_CINEMAS: 'sc',
     SHOW_CINEMAS_MAP: 'scm',
     SHOW_FILMS: 'sf'
 }
@@ -102,7 +102,7 @@ bot.onText(/\/f(.+)/, (msg, [source, match]) => {
                        {
                            text: 'Показать кинотеатры',
                            callback_data: JSON.stringify({
-                               type: ACTION_TYPE.SGOW_CINEMAS,
+                               type: ACTION_TYPE.SHOW_CINEMAS,
                                cinemaUuids: film.cinemas
                            })
                        }
@@ -153,6 +153,25 @@ bot.onText(/\/c(.+)/, (msg, [source, match]) => {
         })
     })
 })
+
+bot.on('callback_query', query => {
+    let data 
+    try {
+        data = JSON.parse(query.data)
+    } catch (e) {
+        throw new Error('Data is not an object')
+    }
+    const { type } = data
+    if (type === ACTION_TYPE.SHOW_CINEMAS_MAP) {
+    }   else if (type === ACTION_TYPE.SHOW_CINEMAS) {
+    }   else if (type === ACTION_TYPE.TOOGLE_FAV_FILM) {
+    }   else if (type === ACTION_TYPE.SHOW_FILMS) {
+        
+    }
+})
+
+
+// ========================================================================
 
 function sendFilmsByQuery(chatId, query) {
     Film.find(query).then(films => {
