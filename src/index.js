@@ -84,8 +84,15 @@ bot.onText(/\/start/, msg => {
 bot.onText(/\/f(.+)/, (msg, [source, match]) => {
     const filmUuid = helper.getItemUuid(source)
     const chatId = helper.getChatId(msg)
-    console.log(filmUuid)
-    Film.findOne({uuid: filmUuid}).then(film => {
+    Promise.all([
+        Film.findOne({uuid: filmUuid}),
+        User.findOne({telegramId: msg.from.id})
+    ]).then(([film, user]) => {
+        let isFav = false
+        if (user) {
+            isFav = user.films.indexOf(film.uuid) !== -1
+        }
+        const favText = isFav ? 'Удалить из избранного : 'Добавить в избранное'
         const caption = `Название: ${film.name}\nГод: ${film.year}\nРейтинг: ${film.rate}\nДлительность: ${film.length}\nСтрана: ${film.country}`
         bot.sendPhoto(chatId, film.picture, {
             caption: caption,
@@ -93,10 +100,11 @@ bot.onText(/\/f(.+)/, (msg, [source, match]) => {
                 inline_keyboard: [
                    [
                        {
-                           text: 'Добавить в избранное',
+                           text: favText,
                            callback_data: JSON.stringify({
                                type: ACTION_TYPE.TOOGLE_FAV_FILM,
-                               filmUuid: film.uuid
+                               filmUuid: film.uuid,
+                                isFav: isFav
                            })
                        },
                        {
