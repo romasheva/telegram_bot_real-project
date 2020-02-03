@@ -222,12 +222,12 @@ function toggleFavoriteFilm(userId, queryId, {filmUuid, isFav}) {
             if (user) {
                 if (isFav) {
                     user.films = user.films.filter(fUuid => fUuid !== filmUuid)
-                } else {
+                }   else {
                     user.films.push(filmUuid)
                 }
-              userPromise = user
-            } else {
-              userPromise = new User ({
+                userPromise = user
+            }   else {
+                userPromise = new User ({
                     telegramId: userId,
                     films: [filmUuid]
                 })
