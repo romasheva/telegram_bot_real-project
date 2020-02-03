@@ -92,7 +92,7 @@ bot.onText(/\/f(.+)/, (msg, [source, match]) => {
         if (user) {
             isFav = user.films.indexOf(film.uuid) !== -1
         }
-        const favText = isFav ? 'Удалить из избранного : 'Добавить в избранное'
+        const favText = isFav ? 'Удалить из избранного' : 'Добавить в избранное'
         const caption = `Название: ${film.name}\nГод: ${film.year}\nРейтинг: ${film.rate}\nДлительность: ${film.length}\nСтрана: ${film.country}`
         bot.sendPhoto(chatId, film.picture, {
             caption: caption,
@@ -163,6 +163,7 @@ bot.onText(/\/c(.+)/, (msg, [source, match]) => {
 })
 
 bot.on('callback_query', query => {
+    const userId = query.from.id
     let data 
     try {
         data = JSON.parse(query.data)
@@ -173,6 +174,7 @@ bot.on('callback_query', query => {
     if (type === ACTION_TYPE.SHOW_CINEMAS_MAP) {
     }   else if (type === ACTION_TYPE.SHOW_CINEMAS) {
     }   else if (type === ACTION_TYPE.TOOGLE_FAV_FILM) {
+        toggleFavoriteFilm(userId.id, data)
     }   else if (type === ACTION_TYPE.SHOW_FILMS) {
         
     }
@@ -212,4 +214,30 @@ function getCinemasInCoord(chatId, location) {
         }).join('\n')
         sendHTML(chatId, html, 'home')
     })
+}
+function toggleFavoriteFilm(userId, queryId, {filmUuid, isFav}) {
+    let userPromise
+    User.findOne({telegramId: userId})
+        .then(user => {
+            if (user) {
+                if (isFav) {
+                    user.films = user.films.filter(fUuid => fUuid !== filmUuid)
+                } else {
+                    user.films.push(filmUuid)
+                }
+              userPromise = user
+            } else {
+              userPromise = new User ({
+                    telegramId: userId,
+                    films: [filmUuid]
+                })
+            }
+            const answerText = isFav ? 'Удалено' : 'Добавлено'
+            userPromise.save().then(_ => {
+                bot.answerCallbackQuery({
+                    callback_query_id: queryId,
+                    text: answerText
+                })
+            })
+        })
 }
