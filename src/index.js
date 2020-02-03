@@ -238,6 +238,6 @@ function toggleFavoriteFilm(userId, queryId, {filmUuid, isFav}) {
                     callback_query_id: queryId,
                     text: answerText
                 })
-            })
-        })
+            }).catch(err => console.log(err))
+        }).catch(err => console.log(err))
 }
