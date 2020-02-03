@@ -174,7 +174,7 @@ bot.on('callback_query', query => {
     if (type === ACTION_TYPE.SHOW_CINEMAS_MAP) {
     }   else if (type === ACTION_TYPE.SHOW_CINEMAS) {
     }   else if (type === ACTION_TYPE.TOOGLE_FAV_FILM) {
-        toggleFavoriteFilm(userId.id, data)
+        toggleFavoriteFilm(userId, query.id, data)
     }   else if (type === ACTION_TYPE.SHOW_FILMS) {
         
     }
