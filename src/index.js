@@ -245,6 +245,7 @@ function toggleFavoriteFilm(userId, queryId, {filmUuid, isFav}) {
 function showFavouriteFilms(chatId, telegramId) {
     User.findOne({telegramId})
         .then(user => {
+            console.log(user)
             if (user) {
               Film.find({uuid: {'$in': user.films}}).then(films => {
                   let html
@@ -256,9 +257,9 @@ function showFavouriteFilms(chatId, telegramId) {
                     html = 'Вы пока ничего не добавили'
                   }
                   sendHTML(chatId, html, 'home')
-              })
+              }).catch(e => console.log(e))
             } else {
               sendHTML(chatId, 'Вы пока ничего не добавили', 'home')
             }
-        })
+        }).catch(c => console.log(e))
 }
