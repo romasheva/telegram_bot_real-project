@@ -249,6 +249,9 @@ function showFavouriteFilms(chatId, userId) {
               Film.find({uuid: {'$in': user.films}}).then(films => {
                   let html
                   if (films.length) {
+                    html = films.map((f, i) => {
+                        return `<b>${i + 1}</b> ${f.name} - <b>${f.rate}</b> (/f${f.uuid})`
+                    })
                   } else {
                     html = 'Вы пока ничего не добавили'
                   }
