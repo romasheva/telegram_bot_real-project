@@ -245,22 +245,20 @@ function toggleFavoriteFilm(userId, queryId, {filmUuid, isFav}) {
 function showFavouriteFilms(chatId, telegramId) {
     User.findOne({telegramId})
         .then(user => {
-            console.log(user)
             if (user) {
-              Film.find({uuid: {'$in': user.films}}).then(films => {
-                  let html
-                  console.log(films)
-                  if (films.length) {
+                Film.find({uuid: {'$in': user.films}}).then(films => {
+                    let html
+                    if (films.length) {
                     html = films.map((f, i) => {
                         return `<b>${i + 1}</b> ${f.name} - <b>${f.rate}</b> (/f${f.uuid})`
                     }).join('\n')
-                  } else {
-                    html = 'Вы пока ничего не добавили'
-                  }
-                  sendHTML(chatId, html, 'home')
-              }).catch(e => console.log(e))
-            } else {
-              sendHTML(chatId, 'Вы пока ничего не добавили', 'home')
+                    } else {
+                      html = 'Вы пока ничего не добавили'
+                    }
+                    sendHTML(chatId, html, 'home')
+                })
+            }   else {
+                sendHTML(chatId, 'Вы пока ничего не добавили', 'home')
             }
-        }).catch(c => console.log(e))
+        })
 }
