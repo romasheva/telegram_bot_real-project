@@ -249,6 +249,7 @@ function showFavouriteFilms(chatId, telegramId) {
             if (user) {
               Film.find({uuid: {'$in': user.films}}).then(films => {
                   let html
+                  console.log(films)
                   if (films.length) {
                     html = films.map((f, i) => {
                         return `<b>${i + 1}</b> ${f.name} - <b>${f.rate}</b> (/f${f.uuid})`
