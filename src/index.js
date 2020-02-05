@@ -35,7 +35,8 @@ bot.on('message', msg => {
     console.log('Working', msg.from.first_name)
     const chatId = helper.getChatId(msg)
     switch (msg.text) {
-        case kb.home.favorite:
+        case kb.home.favourite:
+            showFavouriteFilms(chatId, msg.from.id)
             break
         case kb.home.films:
             bot.sendMessage(chatId, `Выберите жанр:`, {
@@ -240,4 +241,21 @@ function toggleFavoriteFilm(userId, queryId, {filmUuid, isFav}) {
                 })
             }).catch(err => console.log(err))
         }).catch(err => console.log(err))
+}
+function showFavouriteFilms(chatId, userId) {
+    User.findOne({telegramId})
+        .then(user => {
+            if (user) {
+              Film.find({uuid: {'$in': user.films}}).then(films => {
+                  let html
+                  if (films.length) {
+                  } else {
+                    html = 'Вы пока ничего не добавили'
+                  }
+                  sendHTML(chatId, html, 'home')
+              })
+            } else {
+              sendHTML(chatId, 'Вы пока ничего не добавили', 'home')
+            }
+        })
 }
