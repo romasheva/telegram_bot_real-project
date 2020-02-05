@@ -242,7 +242,7 @@ function toggleFavoriteFilm(userId, queryId, {filmUuid, isFav}) {
             }).catch(err => console.log(err))
         }).catch(err => console.log(err))
 }
-function showFavouriteFilms(chatId, userId) {
+function showFavouriteFilms(chatId, telegramId) {
     User.findOne({telegramId})
         .then(user => {
             if (user) {
