@@ -263,3 +263,11 @@ function showFavouriteFilms(chatId, telegramId) {
             }
         })
 }
+function sendCinemasByQuery(userId, query) {
+    Cinema.find(query).then(cinemas => {
+        const html = cinemas.map((c, i) => {
+            return `<b>${i + 1}</b> ${c.name} - /c${c.uuid}`
+        }).join('\n')
+        sendHTML(userId, html, 'home')
+    })
+}
