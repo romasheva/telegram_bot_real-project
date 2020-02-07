@@ -175,7 +175,7 @@ bot.on('callback_query', query => {
     if (type === ACTION_TYPE.SHOW_CINEMAS_MAP) {
     }   else if (type === ACTION_TYPE.SHOW_CINEMAS) {
     }   else if (type === ACTION_TYPE.TOOGLE_FAV_FILM) {
-        toggleFavoriteFilm(userId, query.id, data)
+        toggleFavouriteFilm(userId, query.id, data)
     }   else if (type === ACTION_TYPE.SHOW_FILMS) {
         
     }
@@ -216,7 +216,7 @@ function getCinemasInCoord(chatId, location) {
         sendHTML(chatId, html, 'home')
     })
 }
-function toggleFavoriteFilm(userId, queryId, {filmUuid, isFav}) {
+function toggleFavouriteFilm(userId, queryId, {filmUuid, isFav}) {
     let userPromise
     User.findOne({telegramId: userId})
         .then(user => {
@@ -258,7 +258,7 @@ function showFavouriteFilms(chatId, telegramId) {
                   sendHTML(chatId, html, 'home')
               })
             } else {
-              sendHTML(chatId, 'Вы пока ничего не добавили' , 'home')
+              sendHTML(chatId, 'Вы пока ничего не добавили', 'home')
             }
         })
 }
