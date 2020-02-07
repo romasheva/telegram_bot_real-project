@@ -244,4 +244,17 @@ function toggleFavoriteFilm(userId, queryId, {filmUuid, isFav}) {
 }
 function showFavouriteFilms(chatId, telegramId) {
     User.findOne({telegramId})
+        .then(user => {
+            if (user) {
+              Film.find({uuid: {'$in': user.films}}).then(films => {
+                  let html
+                  if (films.length) {
+                  } else {
+                    html = 'Вы пока ничего не добавили'
+                  }
+              })
+            } else {
+              sendHTML(chatId, 'Вы пока ничего не добавили' , 'home')
+            }
+        })
 }
