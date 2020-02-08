@@ -174,6 +174,8 @@ bot.on('callback_query', query => {
     }
     const { type } = data
     if (type === ACTION_TYPE.SHOW_CINEMAS_MAP) {
+        const {lat, lon} = data
+        bot.sendLocation(query.message.chat.id, lat, lon)
     }   else if (type === ACTION_TYPE.SHOW_CINEMAS) {
         sendCinemasByQuery(userId, {uuid: {'$in': data.cinemaUuids}})
     }   else if (type === ACTION_TYPE.TOOGLE_FAV_FILM) {
