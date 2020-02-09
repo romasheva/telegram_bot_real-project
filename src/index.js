@@ -181,8 +181,36 @@ bot.on('callback_query', query => {
     }   else if (type === ACTION_TYPE.TOOGLE_FAV_FILM) {
         toggleFavouriteFilm(userId, query.id, data)
     }   else if (type === ACTION_TYPE.SHOW_FILMS) {
+        sendFilmsByQuery(userId, {uuid: {'$in': data.filmUuids}})
         
     }
+})
+
+bot.on('inline_query', query => {
+    Film.find({}).then(films => {
+        const results = films.map(f => {
+            const caption = `Название: ${f.name}\nГод: ${f.year}\nРейтинг: ${f.rate}\nДлительность: ${f.length}\nСтрана: ${f.country}`
+            return {
+                id: f.uuid,
+                type: 'photo',
+                photo_url: f.picture,
+                thump_url: f.picture,
+                caption: caption,
+                reply_markup: [
+                    [
+                        {
+                            text: `Кинопоиск: ${f.name}`,
+                            url: f.link
+                        }
+                    ]
+                ]
+            }
+        })
+
+        bot.answerInlineQuery(query.id, results, {
+            cache_time: 0
+        })
+    })
 })
 
 
