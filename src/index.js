@@ -194,9 +194,10 @@ bot.on('inline_query', query => {
                 id: f.uuid,
                 type: 'photo',
                 photo_url: f.picture,
-                thump_url: f.picture,
+                thumb_url: f.picture,
                 caption: caption,
-                reply_markup: [
+                reply_markup: {
+                    inline_keyboard: [
                     [
                         {
                             text: `Кинопоиск: ${f.name}`,
@@ -204,6 +205,7 @@ bot.on('inline_query', query => {
                         }
                     ]
                 ]
+                }
             }
         })
 
