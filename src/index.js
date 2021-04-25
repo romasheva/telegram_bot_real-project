@@ -71,7 +71,7 @@ bot.on('message', msg => {
     }
 })
 
-
+ 
 //Создание клавиатуры
 bot.onText(/\/start/, msg => {
     const text = `Здравствуйте, ${msg.from.first_name}\nВыберите команду для начала работы`;
