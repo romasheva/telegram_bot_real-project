@@ -11,7 +11,7 @@ helper.logStart()
 mongoose.Promise = global.Promise
 mongoose.connect(config.DB_URL, {
     useMongoClient: true
-})dsa
+})
     .then(() => console.log('MongoDB connected'))
     .catch((err) => console.log(err))
 require('./models/film.model')
