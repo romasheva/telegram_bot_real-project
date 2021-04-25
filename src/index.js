@@ -287,7 +287,7 @@ function showFavouriteFilms(chatId, telegramId) {
                         return `<b>${i + 1}</b> ${f.name} - <b>${f.rate}</b> (/f${f.uuid})`
                     }).join('\n')
                   } else {
-                    html = 'Вы пока ничего не добавили'
+                    html = 'Вы пока ничего не добавили.dsadsad'
                   }
                   sendHTML(chatId, html, 'home')
               })
