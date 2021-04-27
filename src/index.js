@@ -8,7 +8,7 @@ const database = require('../database.json')
 const kb = require('./keyboard-buttons');
 const keyboard = require('./keyboard') 
 helper.logStart() 
-mongoose.Promise = global.Promise 
+mongoose.Promise = global.Promise  
 mongoose.connect(config.DB_URL, { 
     useMongoClient: true         
 })   
