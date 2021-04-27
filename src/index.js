@@ -43,7 +43,7 @@ bot.on('message', msg => {
                 reply_markup: {keyboard: keyboard.films}
             })
             break
-        case kb.film.comedy:
+        case kb.film.comedy: 
             sendFilmsByQuery(chatId, {type: 'comedy'})
             break
         case kb.film.action:
