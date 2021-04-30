@@ -29,7 +29,7 @@ const ACTION_TYPE = {
     SHOW_FILMS: 'sf'
 }
 const bot = new TelegramBot(config.TOKEN, {
-    polling: true
+    polling: true 
 })
 bot.on('message', msg => {
     console.log('Working', msg.from.first_name)
