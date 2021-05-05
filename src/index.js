@@ -39,7 +39,7 @@ bot.on('message', msg => {
             showFavouriteFilms(chatId, msg.from.id)
             break 
         case kb.home.films:
-            bot.sendMessage(chatId, `Выберите жанр:`, {
+            bot.sendMessage(chatId, `Выберите жанр:`, { 
                 reply_markup: {keyboard: keyboard.films}
             })
             break
