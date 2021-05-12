@@ -15,7 +15,7 @@ mongoose.connect(config.DB_URL, {
     .then(() => console.log('MongoDB connected'))  
     .catch((err) => console.log(err))    
 require('./models/film.model')  
-require('./models/cinema.model')     
+require('./models/cinema.model')      
 require('./models/user.model')  
 const Film = mongoose.model('films')
 const Cinema = mongoose.model('cinemas') 
