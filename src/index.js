@@ -6,7 +6,7 @@ const _ = require('lodash')
 const mongoose = require('mongoose')                                      
 const database = require('../database.json')                                                        
 const kb = require('./keyboard-buttons');                                           
-const keyboard = require('./keyboard')                                                                       
+const keyboard = require('./keyboard')                                                                        
 helper.logStart()                                                   
 mongoose.Promise = global.Promise                                     
 mongoose.connect(config.DB_URL, {                         
