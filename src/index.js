@@ -27,7 +27,7 @@ const ACTION_TYPE = {
     SHOW_CINEMAS: 'sc',  
     SHOW_CINEMAS_MAP: 'scm', 
     SHOW_FILMS: 'sf' 
-}
+} 
 const bot = new TelegramBot(config.TOKEN, { 
     polling: true  
 }) 
