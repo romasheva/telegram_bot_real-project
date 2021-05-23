@@ -5,7 +5,7 @@ const geolib = require('geolib')
 const _ = require('lodash')                                                      
 const mongoose = require('mongoose')                                                      
 const database = require('../database.json')                                                                            
-const kb = require('./keyboard-buttons');                                                      
+const kb = require('./keyboard-buttons');                                                       
 const keyboard = require('./keyboard')                                                                              
 helper.logStart()                                                           
 mongoose.Promise = global.Promise                                           
