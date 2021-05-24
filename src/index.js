@@ -9,7 +9,7 @@ const kb = require('./keyboard-buttons');
 const keyboard = require('./keyboard')                                                                              
 helper.logStart()                                                            
 mongoose.Promise = global.Promise                                           
-mongoose.connect(config.DB_URL, {                          
+mongoose.connect(config.DB_URL, {                           
     useMongoClient: true                       
 })              
     .then(() => console.log('MongoDB connected'))   
@@ -25,7 +25,7 @@ const User = mongoose.model('users')
 const ACTION_TYPE = {
     TOOGLE_FAV_FILM: 'tff',
     SHOW_CINEMAS: 'sc',  
-    SHOW_CINEMAS_MAP: 'scm', 
+    SHOW_CINEMAS_MAP: 'scm',  
     SHOW_FILMS: 'sf' 
 } 
 const bot = new TelegramBot(config.TOKEN, { 
