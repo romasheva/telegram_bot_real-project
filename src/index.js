@@ -22,7 +22,7 @@ const Cinema = mongoose.model('cinemas')
 const User = mongoose.model('users')
 // database.films.forEach(f => new Film(f).save().catch(e => console.log(e)))
 // database.cinemas.forEach(c => new Cinema(c).save().catch(e => console.log(e)))
-const ACTION_TYPE = {
+const ACTION_TYPE = { 
     TOOGLE_FAV_FILM: 'tff',
     SHOW_CINEMAS: 'sc',  
     SHOW_CINEMAS_MAP: 'scm',  
